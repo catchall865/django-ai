@@ -33,34 +33,61 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'suggest' %}">Suggest</a>
+              <a class="nav-link" aria-current="page" href="{% url 'suggest' %}"
+                >Suggest</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'home' %}">Fix</a>
+              <a class="nav-link" aria-current="page" href="{% url 'home' %}"
+                >Fix</a
+              >
             </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'past' %}"
+                  >History</a
+                >
+              </li>
+            <li class="nav-item">
+              <a class="nav-link m" aria-current="page" href="{% url 'logout' %}"
+                >Logout</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                href="{% url 'register' %}"
+                >Register</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'home' %}"
+                >Login</a
+              >
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
     </nav>
 
-
-
     <div class="container">
       <br />
-      {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-          {% endfor %}
-      {% endif %}
-      {% block content %} {% endblock %}
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %} {% block content %} {% endblock %}
     </div>
 
     <script

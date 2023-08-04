@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Previous Code</h1>
+<br>
+<br>
+
+{% if code %}
+    {% for thing in code %}
+<h3>Prompt:</h3>
+{{ thing.question }}
+<br>
+<br>
+<h3>Answer:</h3>
+<pre>
+<code class="language-{{ thing.language }} line-numbers">
+{{ thing.code_answer }}
+</code>
+</pre>
+    <a href="{% url 'delete_past' thing.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+<br><br>
+    {% endfor %}
+
+{% endif %}
+{% endblock %}

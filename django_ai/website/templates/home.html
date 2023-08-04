@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
 {% if response %}
 <pre>
 <code class="language-{{ lang }} line-numbers">
@@ -57,6 +59,27 @@ else
   <button type="submit" class="btn btn-secondary mb-3">Submit</button>
 </form>
 
+{% endif %}
+
+{% else %}
+<h1 class="text-center">Login</h1>
+<br>
+
+<div class="col-md-6 offset-md-3">
+  <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="form-group">
+      <input type="text" class="form-control" placeholder="Enter username" name="username">
+      <br>
+    </div>
+      <div class="form-group">
+      <input type="text" class="form-control" placeholder="Enter password" name="password">
+      <br>
+    </div>
+
+    <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+</div>
 {% endif %}
 
 {% endblock %}
